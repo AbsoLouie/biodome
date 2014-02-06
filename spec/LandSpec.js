@@ -31,4 +31,9 @@ describe("Land", function() {
     expect(land.amountOfGrass).toBeLessThan(grass)
   })
 
+  it("should expand", function() {
+    land.addArea(1);
+    expect(land.area).toEqual(2)
+  })
+
 });

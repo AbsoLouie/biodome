@@ -5,10 +5,14 @@ function Land(area) {
 }
 
 Land.prototype.growGrass = function() {
-  this.amountOfGrass =+ this.area * this.growthRate
+  this.amountOfGrass += this.area * this.growthRate
 }
 
 Land.prototype.beEaten = function(consumer) {
-  this.amountOfGrass =- consumer.unitsConsumed;
+  this.amountOfGrass -= consumer.unitsConsumed;
   return consumer.unitsConsumed;
+}
+
+Land.prototype.addArea = function(area) {
+  this.area += area;
 }
