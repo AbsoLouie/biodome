@@ -1,39 +1,24 @@
-describe("Land", function() {
-  var land;
+describe("Resource", function() {
 
-  beforeEach(function() {
-    land = new Land();
-    animal = new Animal();
+  describe("Grasslands", function() {
+    beforeEach(function() {
+      grassland = new Grassland();
+      pool = new ResourcePool();
+    });
+
+    it("should produce resources", function() {
+      expect(grassland.produceResource()).toEqual(1);
+    });
+
+    it("should not produce when cap is reached", function(){
+      grassland.amountOfResource = 5;
+      expect(grassland.produceResource()).toEqual(5);
+    });
+
+    it("should provide resources", function() {
+      grassland.produceResource();
+      expect(grassland.provideResource()).toEqual(1);
+      expect(grassland.amountOfResource).toEqual(0);
+    });
   });
-
-  it("should have a default area of 1", function() {
-    expect(land.area).toEqual(1);
-  })
-
-  it("should take an input 'area'", function() {
-    land = new Land(10);
-    expect(land.area).toEqual(10);
-  })
-
-  it("should have no grass", function() {
-    expect(land.amountOfGrass).toEqual(0);
-  })
-
-  it("should grow grass", function() {
-    land.growGrass();
-    expect(land.amountOfGrass).toBeGreaterThan(0);
-  })
-
-  it("should be eaten", function() {
-    land.growGrass();
-    grass = land.amountOfGrass;
-    land.beEaten(animal);
-    expect(land.amountOfGrass).toBeLessThan(grass)
-  })
-
-  it("should expand", function() {
-    land.addArea(1);
-    expect(land.area).toEqual(2)
-  })
-
 });

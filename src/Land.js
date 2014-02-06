@@ -1,18 +1,32 @@
-function Land(area) {
-  this.area = typeof area !== 'undefined' ? area : 1;
-  this.amountOfGrass = 0
-  this.growthRate = 1
+// Resources
+function Resource() {
+  this.rate = NaN;
+  this.cap = NaN;
+  this.amountOfResource = 0;
 }
 
-Land.prototype.growGrass = function() {
-  this.amountOfGrass += this.area * this.growthRate
+Resource.prototype.produceResource = function() {
+  if (this.amountOfResource < this.cap){
+    this.amountOfResource += this.rate;    
+  }
+  return this.amountOfResource
 }
 
-Land.prototype.beEaten = function(consumer) {
-  this.amountOfGrass -= consumer.unitsConsumed;
-  return consumer.unitsConsumed;
+Resource.prototype.provideResource = function() {
+  resourcesProvided = this.amountOfResource;
+  this.amountOfResource = 0;
+  return resourcesProvided;
 }
 
-Land.prototype.addArea = function(area) {
-  this.area += area;
+// Grassland
+function Grassland() {
+  this.rate = 1;
+  this.cap = 5;
+}
+
+Grassland.prototype = new Resource;
+
+// Resource Pools
+function ResourcePool() {
+  this.amountOfResource = 0
 }
