@@ -11,7 +11,7 @@ describe("Animal", function() {
     expect(animal.isHungry()).toEqual(true);
   });
 
-  it("should eat grass", function() {
+  it("should eat grass to battle hunger", function() {
     initialHunger = animal.satiationLevel
     animal.eat(land);
     expect(animal.satiationLevel).toBeGreaterThan(initialHunger);

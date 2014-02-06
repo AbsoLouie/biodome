@@ -1,33 +1,14 @@
-function Land() {
-  this.area = 1
+function Land(area) {
+  this.area = typeof area !== 'undefined' ? area : 1;
   this.amountOfGrass = 0
+  this.growthRate = 1
 }
 
 Land.prototype.growGrass = function() {
-  this.amountOfGrass = this.amountOfGrass + this.area * 1
+  this.amountOfGrass =+ this.area * this.growthRate
 }
 
-Land.prototype.beEaten = function() {
-  this.amountOfGrass =- 1
+Land.prototype.beEaten = function(consumer) {
+  this.amountOfGrass =- consumer.unitsConsumed;
+  return consumer.unitsConsumed;
 }
-
-// Player.prototype.play = function(song) {
-//   this.currentlyPlayingSong = song;
-//   this.isPlaying = true;
-// };
-
-// Player.prototype.pause = function() {
-//   this.isPlaying = false;
-// };
-
-// Player.prototype.resume = function() {
-//   if (this.isPlaying) {
-//     throw new Error("song is already playing");
-//   }
-
-//   this.isPlaying = true;
-// };
-
-// Player.prototype.makeFavorite = function() {
-//   this.currentlyPlayingSong.persistFavoriteStatus(true);
-// };

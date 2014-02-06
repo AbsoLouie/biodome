@@ -1,6 +1,7 @@
 function Animal() {
   this.satiationLevel = 0
   this.hungerThreshold = 5
+  this.unitsConsumed = 1
 }
 
 Animal.prototype.isHungry = function() {
@@ -12,6 +13,6 @@ Animal.prototype.isHungry = function() {
 }
 
 Animal.prototype.eat = function(consumable) {
-  consumable.beEaten();
-  this.satiationLevel += 1;
+  foodProvided = consumable.beEaten(this);
+  this.satiationLevel += foodProvided;
 }
