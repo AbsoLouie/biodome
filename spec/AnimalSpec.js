@@ -1,20 +1,22 @@
-// describe("Animal", function() {
-//   var animal;
+describe("Animal", function() {
 
-//   beforeEach(function() {
-//     animal = new Animal();
-//     land = new Land();
-//     land.growGrass();
-//   });
+  describe("Rabbit", function() {
 
-//   it("should start hungry", function() {
-//     expect(animal.isHungry()).toEqual(true);
-//   });
+    beforeEach(function() {
+      rabbit = new Rabbit;
+      grassland = new Grassland;
+      grassland.amountOfResource = 2;
+    });
 
-//   it("should eat grass to battle hunger", function() {
-//     initialHunger = animal.satiationLevel
-//     animal.eat(land);
-//     expect(animal.satiationLevel).toBeGreaterThan(initialHunger);
-//   });
+    it("should start hungry", function() {
+      expect(rabbit.isHungry()).toBeTruthy();
+    });
 
-// });
+    it("should eat grass to battle hunger", function() {
+      rabbit.feed(grassland)
+      expect(rabbit.amountOfResource).toEqual(3);
+    });
+
+  });
+
+});

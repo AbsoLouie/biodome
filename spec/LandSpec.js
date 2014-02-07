@@ -7,12 +7,14 @@ describe("Resource", function() {
     });
 
     it("should produce resources", function() {
-      expect(grassland.produceResource()).toEqual(1);
+      grassland.produceResource()
+      expect(grassland.amountOfResource).toEqual(1);
     });
 
     it("should not produce when cap is reached", function(){
       grassland.amountOfResource = 5;
-      expect(grassland.produceResource()).toEqual(5);
+      grassland.produceResource()
+      expect(grassland.amountOfResource).toEqual(5);
     });
 
     it("should provide resources", function() {
