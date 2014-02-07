@@ -1,76 +1,26 @@
-describe("Land", function() {
-  var land;
+describe("Resource", function() {
 
-  beforeEach(function() {
-    land = new Land();
+  describe("Grasslands", function() {
+    beforeEach(function() {
+      grassland = new Grassland();
+      pool = new ResourcePool();
+    });
+
+    it("should produce resources", function() {
+      grassland.produceResource()
+      expect(grassland.amountOfResource).toEqual(1);
+    });
+
+    it("should not produce when cap is reached", function(){
+      grassland.amountOfResource = 5;
+      grassland.produceResource()
+      expect(grassland.amountOfResource).toEqual(5);
+    });
+
+    it("should provide resources", function() {
+      grassland.produceResource();
+      expect(grassland.provideResource()).toEqual(1);
+      expect(grassland.amountOfResource).toEqual(0);
+    });
   });
-
-  it("should have an area of 1", function() {
-    expect(land.area).toEqual(1);
-  })
-
-  it("should have no grass", function() {
-    expect(land.amountOfGrass).toEqual(0);
-  })
-
-  it("should grow grass", function() {
-    land.growGrass();
-    expect(land.amountOfGrass).toBeGreaterThan(0);
-  })
-
-  it("should be eaten", function() {
-    land.growGrass();
-    grass = land.amountOfGrass;
-    land.beEaten();
-    expect(land.amountOfGrass).toBeLessThan(grass)
-  })
-
-  // it("should be able to play a Song", function() {
-  //   player.play(song);
-  //   expect(player.currentlyPlayingSong).toEqual(song);
-
-  //   //demonstrates use of custom matcher
-  //   expect(player).toBePlaying(song);
-  // });
-
-  // describe("when song has been paused", function() {
-  //   beforeEach(function() {
-  //     player.play(song);
-  //     player.pause();
-  //   });
-
-  //   it("should indicate that the song is currently paused", function() {
-  //     expect(player.isPlaying).toBeFalsy();
-
-  //     // demonstrates use of 'not' with a custom matcher
-  //     expect(player).not.toBePlaying(song);
-  //   });
-
-  //   it("should be possible to resume", function() {
-  //     player.resume();
-  //     expect(player.isPlaying).toBeTruthy();
-  //     expect(player.currentlyPlayingSong).toEqual(song);
-  //   });
-  // });
-
-  // // demonstrates use of spies to intercept and test method calls
-  // it("tells the current song if the user has made it a favorite", function() {
-  //   spyOn(song, 'persistFavoriteStatus');
-
-  //   player.play(song);
-  //   player.makeFavorite();
-
-  //   expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
-  // });
-
-  // //demonstrates use of expected exceptions
-  // describe("#resume", function() {
-  //   it("should throw an exception if song is already playing", function() {
-  //     player.play(song);
-
-  //     expect(function() {
-  //       player.resume();
-  //     }).toThrow("song is already playing");
-  //   });
-  // });
 });

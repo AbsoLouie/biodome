@@ -1,33 +1,62 @@
-function Land() {
-  this.area = 1
-  this.amountOfGrass = 0
+// Resources
+function Resource() {
+  this.rate = NaN;
+  this.cap = NaN;
+  this.amountOfResource = 0;
 }
 
-Land.prototype.growGrass = function() {
-  this.amountOfGrass = this.amountOfGrass + this.area * 1
+Resource.prototype.produceResource = function() {
+  if (this.amountOfResource < this.cap){
+    this.amountOfResource += this.rate;    
+  }
+  this.amountOfResource
 }
 
-Land.prototype.beEaten = function() {
-  this.amountOfGrass =- 1
+Resource.prototype.provideResource = function(amount) {
+  amountUsed = typeof amount !== 'undefined' ? amount : this.amountOfResource;
+  this.amountOfResource -= amountUsed;
+  return amountUsed;
 }
 
-// Player.prototype.play = function(song) {
-//   this.currentlyPlayingSong = song;
-//   this.isPlaying = true;
-// };
+// Grassland
+function Grassland() {
+  this.rate = 1;
+  this.cap = 5;
+}
 
-// Player.prototype.pause = function() {
-//   this.isPlaying = false;
-// };
+Grassland.prototype = new Resource;
 
-// Player.prototype.resume = function() {
-//   if (this.isPlaying) {
-//     throw new Error("song is already playing");
-//   }
+// Animals
 
-//   this.isPlaying = true;
-// };
+function Animal() {
+  this.mealSize = NaN
+}
 
-// Player.prototype.makeFavorite = function() {
-//   this.currentlyPlayingSong.persistFavoriteStatus(true);
-// };
+Animal.prototype = new Resource;
+
+Animal.prototype.isHungry = function() {
+  if (this.amountOfResource <= (1/2)*this.cap) {
+    return true
+  }
+}
+
+Animal.prototype.feed = function(resource) {
+  if (this.isHungry()) {
+    this.amountOfResource += resource.provideResource(this.mealSize)
+  }
+}
+
+// Rabbit
+
+function Rabbit() {
+  this.mealSize = 2
+  this.amountOfResource = 1
+  this.cap = 4
+}
+
+Rabbit.prototype = new Animal;
+
+// Resource Pools
+function ResourcePool() {
+  this.amountOfResource = 0
+}
