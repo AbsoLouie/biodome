@@ -5,18 +5,23 @@ function Resource() {
   this.amountOfResource = 0;
 }
 
-Resource.prototype.produceResource = function() {
-  if (this.amountOfResource < this.cap){
-    this.amountOfResource += this.rate;    
-  }
-  this.amountOfResource
-}
+Function.prototype.method = function (name, func) {
+  this.prototype[name] = func;
+  return this;
+};
 
-Resource.prototype.provideResource = function(amount) {
-  amountUsed = typeof amount !== 'undefined' ? amount : this.amountOfResource;
-  this.amountOfResource -= amountUsed;
-  return amountUsed;
-}
+Resource.method('produceResource', function () {
+  if (this.amountOfResource < this.cap){
+    this.amountOfResource += this.rate;
+  }
+  return this.amountOfResource
+});
+
+Resource.method('provideResource', function (amount) {
+  amount = typeof amount !== 'undefined' ? amount : this.amountOfResource;
+  this.amountOfResource -= amount;
+  return amount;
+});
 
 // Grassland
 function Grassland() {
@@ -34,17 +39,17 @@ function Animal() {
 
 Animal.prototype = new Resource;
 
-Animal.prototype.isHungry = function() {
+Animal.method('isHungry', function () {
   if (this.amountOfResource <= (1/2)*this.cap) {
     return true
   }
-}
+})
 
-Animal.prototype.feed = function(resource) {
+Animal.method('feed', function (resource) {
   if (this.isHungry()) {
     this.amountOfResource += resource.provideResource(this.mealSize)
   }
-}
+})
 
 // Rabbit
 
