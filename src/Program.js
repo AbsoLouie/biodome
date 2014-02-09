@@ -1,16 +1,16 @@
-// var land;
-// land = new Land();
-// animalFarm = [];
+var rabbit;
+var grassland;
 
-// window.setInterval(function(){
-//   land.growGrass();
-//   console.log(land.amountOfGrass);
-// },1000);
+rabbit = new Rabbit();
+grassland = new Grassland();
 
-// window.setInterval(function(){
-//   animalFarm.forEach(function(animal) {
-//     animal.eat(land)
-//   })
-// },5000);
+window.setInterval(function() {
+  rabbit.feed(grassland);
+  console.log('Rabbit just ate')
+}, 5000)
 
+window.setInterval(function() {
+  grassland.produceResource();
+  console.log('There is ' + grassland.amountOfResource + ' grass.')
+}, 1000)
 
